@@ -29,9 +29,6 @@ namespace SqlIntro
                 var cmd = conn.CreateCommand();
 
                 cmd.CommandText = "SELECT * FROM Products; "; 
-
-                //TODO:  Write a SELECT statement that gets all products
-
                 var dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
@@ -49,7 +46,7 @@ namespace SqlIntro
             using (var conn = new MySqlConnection(_connectionString))
             {
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = ""; //Write a delete statement that deletes by id
+                cmd.CommandText = "DELETE FROM Products WHERE ProductID = @id;"; 
                 cmd.ExecuteNonQuery();
             }
         }
