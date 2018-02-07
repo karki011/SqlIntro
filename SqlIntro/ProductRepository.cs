@@ -36,7 +36,6 @@ namespace SqlIntro
                 }
             }
         }
-
         /// <summary>
         /// Deletes a Product from the database
         /// </summary>
