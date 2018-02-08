@@ -28,7 +28,7 @@ namespace SqlIntro
                 conn.Open();
                 var cmd = conn.CreateCommand();
 
-                cmd.CommandText = "SELECT * FROM Products; "; 
+                cmd.CommandText = "SELECT * FROM Products;"; 
                 var dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
