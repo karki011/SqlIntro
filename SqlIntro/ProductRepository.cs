@@ -10,7 +10,7 @@ using MySql.Data.MySqlClient;
 
 namespace SqlIntro
 {
-    public class ProductRepository
+    public class ProductRepository : IProductRepository
     {
         private readonly IDbConnection _conn;
 
@@ -28,12 +28,15 @@ namespace SqlIntro
             {
                 conn.Open();
                 var cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT name FROM Product;";
 
-                cmd.CommandText = "SELECT * FROM Product;";
                 var dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    yield return new Product { Name = dr["Name"].ToString() };
+                    yield return new Product
+                    {
+                        Name = dr["Name"].ToString(),
+                    };
                 }
             }
         }
@@ -45,8 +48,11 @@ namespace SqlIntro
         {
             using (var conn = _conn)
             {
+                conn.Open();
+
                 var cmd = conn.CreateCommand();
                 cmd.CommandText = "DELETE FROM Product WHERE ProductID = @id;";
+                cmd.AddWithValue("@id", id);
                 cmd.ExecuteNonQuery();
             }
         }
@@ -56,12 +62,12 @@ namespace SqlIntro
         /// <param name="prod"></param>
         public void UpdateProduct(Product prod)
         {
-            //This is annoying and unnecessarily tedious for large objects.
-            //More on this in the future...  Nothing to do here..
             using (var conn = _conn)
             {
+                conn.Open();
+
                 var cmd = conn.CreateCommand();
-                cmd.CommandText = "update product set name = @name where id = @id";
+                cmd.CommandText = "UPDATE Product SET name = @name where productId = @id";
                 cmd.AddWithValue("@name", prod.Name);
                 cmd.AddWithValue("@id", prod.Id);
                 cmd.ExecuteNonQuery();
@@ -75,9 +81,11 @@ namespace SqlIntro
         {
             using (var conn = _conn)
             {
+                conn.Open();
+
                 var cmd = conn.CreateCommand();
                 cmd.CommandText = "INSERT into product (name) values(@name)";
-                // cmd.Parameters.AddWithValue("@name", prod.Name);
+                cmd.AddWithValue("@name", prod.Name);
                 cmd.ExecuteNonQuery();
             }
         }
