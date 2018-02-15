@@ -10,7 +10,6 @@ namespace SqlIntro
         {
             var connectionString = ConfigurationManager.ConnectionStrings["MySQLConnection"].ConnectionString;
             var connection = new MySqlConnection(connectionString);
-
             var repo = new DapperProductRepo(connection);
 
             Product product = null;
@@ -22,13 +21,11 @@ namespace SqlIntro
 
             repo.DeleteProduct(1001);
 
-
             var newProduct = new Product
             {
                 Name = "new product"
             };
             repo.InsertProduct(newProduct);
-
 
             repo.UpdateProduct(new Product
             {
@@ -37,8 +34,6 @@ namespace SqlIntro
             });
 
             Console.ReadLine();
-        }
-
-       
+        } 
     }
 }
