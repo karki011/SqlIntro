@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Configuration;
+using MySql.Data.MySqlClient;
 
 namespace SqlIntro
 {
@@ -6,7 +8,7 @@ namespace SqlIntro
     {
         static void Main(string[] args)
         {
-            var connectionString = ""; //get connectionString format from connectionstrings.com and change to match your database
+            var connectionString = ConfigurationManager.ConnectionStrings["MySQLConnection"].ConnectionString;
             var repo = new ProductRepository(connectionString);
             foreach (var prod in repo.GetProducts())
             {
