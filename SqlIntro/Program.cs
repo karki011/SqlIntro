@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
 using MySql.Data.MySqlClient;
+using System.Linq;
 
 namespace SqlIntro
 {
@@ -33,10 +36,22 @@ namespace SqlIntro
                 Name = "Subash karki"
             });
 
-            /*Console.WriteLine("Start.");
-            repo.GetProductsWithReviewLeft();
 
-            Console.WriteLine("LEFT JOIN PERMFORMED.");*/
+            Console.WriteLine("Start.");
+
+             foreach (var prod in repo.GetProductsWithReviewLeft())
+
+             {
+                 if (product == null) { product = prod; };
+
+                Console.WriteLine(prod.Name );
+             }
+             
+            //repo.GetProductsWithReviewLeft();
+
+
+
+            //repo.GetProductsWithReviewInner();
 
             Console.ReadLine();
         } 

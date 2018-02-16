@@ -82,5 +82,45 @@ namespace SqlIntro
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public IEnumerable<Product> GetProductsWithReviewLeft()
+        {
+            using (var conn = _conn)
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText =
+                    ("SELECT product.Name, productreview.Rating FROM Product LEFT JOIN productreview ON productreview.productID = product.productID");
+                var dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    yield return new Product
+                    {
+                        Name = dr["Name"].ToString(),
+                        Id = int.Parse(dr["ProductId"].ToString()),
+
+                    };
+                }
+            }
+        }
+        public IEnumerable<Product> GetProductsWithReviewInner()
+        {
+            using (var conn = _conn)
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = ("SELECT product.Name, productreview.Rating FROM Product INNER JOIN productreview ON productreview.productID = product.productID");
+                var dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    yield return new Product
+                    {
+                        Name = dr["Name"].ToString(),
+                        Id = int.Parse(dr["ProductId"].ToString())
+
+                    };
+                }
+            }
+        }
     }
 }

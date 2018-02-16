@@ -66,7 +66,8 @@ namespace SqlIntro
             using (var conn = _conn)
             {
                 conn.Open();
-                return conn.Query<Product>("SELECT * FROM Product LEFT JOIN productreview ON productreview.productID = product.productID");
+                return conn.Query<Product>(
+                    "SELECT product.Name, productreview.Rating FROM Product LEFT JOIN productreview ON productreview.productID = product.productID");
             }
         }
 
@@ -75,11 +76,9 @@ namespace SqlIntro
             using (var conn = _conn)
             {
                 conn.Open();
-                return conn.Query<Product>(
-                    "SELCET * FROM Product INNER JOIN productreview ON productreview.productID = product.productID");
+                return conn.Query<Product>("SELECT product.Name, productreview.Rating FROM Product INNER JOIN productreview ON productreview.productID = product.productID");
             }
         }
-        
     }
 }
 
