@@ -60,6 +60,26 @@ namespace SqlIntro
                 conn.Execute("INSERT into product (name) values(@name)", new { name = prod.Name });
             }
         }
+
+        public IEnumerable<Product> GetProductsWithReviewLeft()
+        {
+            using (var conn = _conn)
+            {
+                conn.Open();
+                return conn.Query<Product>("SELECT * FROM Product LEFT JOIN productreview ON productreview.productID = product.productID");
+            }
+        }
+
+        public IEnumerable<Product> GetProductsWithReviewInner()
+        {
+            using (var conn = _conn)
+            {
+                conn.Open();
+                return conn.Query<Product>(
+                    "SELCET * FROM Product INNER JOIN productreview ON productreview.productID = product.productID");
+            }
+        }
+        
     }
 }
 

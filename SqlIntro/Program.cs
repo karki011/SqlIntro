@@ -33,6 +33,11 @@ namespace SqlIntro
                 Name = "Subash karki"
             });
 
+            /*Console.WriteLine("Start.");
+            repo.GetProductsWithReviewLeft();
+
+            Console.WriteLine("LEFT JOIN PERMFORMED.");*/
+
             Console.ReadLine();
         } 
     }
