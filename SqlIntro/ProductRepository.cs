@@ -97,12 +97,12 @@ namespace SqlIntro
                     yield return new Product
                     {
                         Name = dr["Name"].ToString(),
-                        Id = int.Parse(dr["prodcutreview"].ToString()),
-                        
+                        Id = int.Parse(dr["prodcutreview"].ToString()),      
                     };
                 }
             }
         }
+
         public IEnumerable<Product> GetProductsWithReviewInner()
         {
             using (var conn = _conn)
@@ -117,7 +117,6 @@ namespace SqlIntro
                     {
                         Name = dr["Name"].ToString(),
                         Id = int.Parse(dr["ProductId"].ToString())
-
                     };
                 }
             }
