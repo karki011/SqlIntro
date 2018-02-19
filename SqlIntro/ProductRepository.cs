@@ -97,8 +97,8 @@ namespace SqlIntro
                     yield return new Product
                     {
                         Name = dr["Name"].ToString(),
-                        Id = int.Parse(dr["ProductId"].ToString()),
-
+                        Id = int.Parse(dr["prodcutreview"].ToString()),
+                        
                     };
                 }
             }

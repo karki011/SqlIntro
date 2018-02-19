@@ -18,7 +18,7 @@ namespace SqlIntro
             Product product = null;
             foreach (var prod in repo.GetProducts())
             {
-                if(product == null) { product = prod; };
+                if (product == null) { product = prod; };
                 Console.WriteLine("Product Name:" + prod.Name);
             }
 
@@ -26,34 +26,27 @@ namespace SqlIntro
 
             var newProduct = new Product
             {
-                Name = "new product"
+                Name = "Same old product"
             };
             repo.InsertProduct(newProduct);
 
             repo.UpdateProduct(new Product
             {
-                Id =3,
+                Id = 3,
                 Name = "Subash karki"
             });
 
+            foreach (var prod in repo.GetProductsWithReviewLeft())
 
-            Console.WriteLine("Start.");
+            {
+                if (product == null) { product = prod; };
 
-             foreach (var prod in repo.GetProductsWithReviewLeft())
-
-             {
-                 if (product == null) { product = prod; };
-
-                Console.WriteLine(prod.Name );
-             }
-             
-            //repo.GetProductsWithReviewLeft();
-
-
-
-            //repo.GetProductsWithReviewInner();
+                Console.WriteLine(prod.Name);
+            }
+            repo.GetProductsWithReviewLeft();
+            repo.GetProductsWithReviewInner();
 
             Console.ReadLine();
-        } 
+        }
     }
 }
